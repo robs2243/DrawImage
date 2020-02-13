@@ -50,16 +50,18 @@ public class Main extends Application {
 			//button.setText("Klick mich");
                         img = new ImageView();
                         bild = new Image("lou2.png");
-                        img.setOnMouseDragged(event -> {
-                        double x=event.getX();
-                        double y=event.getY();
-                        WritableImage wi=new WritableImage(bild.getPixelReader(),(int)bild.getWidth(),(int)bild.getHeight());
-                        PixelWriter pw=wi.getPixelWriter();
-                        pw.setColor((int)x,(int)y,new Color(0,0,0,1));
-                        bild=wi;
+                        img.setFitHeight(bild.getHeight());
+                        img.setFitWidth(bild.getWidth());
                         img.setImage(bild);
-                        
-                    });
+                        img.setOnMouseDragged(event -> {
+                            double x=event.getX();
+                            double y=event.getY();
+                            WritableImage wi=new WritableImage(bild.getPixelReader(),(int)bild.getWidth(),(int)bild.getHeight());
+                            PixelWriter pw=wi.getPixelWriter();
+                            pw.setColor((int)x,(int)y,new Color(0,0,0,1));
+                            bild=wi;
+                            img.setImage(bild);
+                        });
 
 			// Fügen den Button zu unserem StackPane (Fenster) hinzu
 			root.getChildren().add(img);
