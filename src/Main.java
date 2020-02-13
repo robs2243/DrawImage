@@ -13,7 +13,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -22,6 +25,7 @@ public class Main extends Application {
 	// Hier legen wir einen Button an
 	//Button button;
         ImageView img;
+        Image bild;
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -44,16 +48,16 @@ public class Main extends Application {
 			// Initialisieren des Buttons und setzen des Textes der auf dem Button auftaucht
 			//button = new Button();
 			//button.setText("Klick mich");
-                        img = new ImageView("lou2.png");
-                        
+                        img = new ImageView();
+                        bild = new Image("lou2.png");
                         img.setOnMouseDragged(event -> {
                         double x=event.getX();
                         double y=event.getY();
-                        WritableImage wi=new WritableImage(i[0].getPixelReader(),(int)i[0].getWidth(),(int)i[0].getHeight());
+                        WritableImage wi=new WritableImage(bild.getPixelReader(),(int)bild.getWidth(),(int)bild.getHeight());
                         PixelWriter pw=wi.getPixelWriter();
                         pw.setColor((int)x,(int)y,new Color(0,0,0,1));
-                        i[0]=wi;
-                        img.setImage(i[0]);
+                        bild=wi;
+                        img.setImage(bild);
                         
                     });
 
